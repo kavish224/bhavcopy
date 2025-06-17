@@ -1,0 +1,25 @@
+name: Test NSE BhavCopy Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-nse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch BhavCopy from NSE
+        run: |
+          date=$(date +'%Y%m%d')
+          url="https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_${date}_F_0000.csv.zip"
+
+          echo "Testing URL: $url"
+          http_code=$(curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0" -e "https://www.nseindia.com/" "$url")
+          echo "HTTP Status Code: $http_code"
+
+          if [ "$http_code" -eq 200 ]; then
+            echo "✅ NSE BhavCopy file is accessible from GitHub Actions."
+          else
+            echo "❌ NSE BhavCopy file is NOT accessible from GitHub Actions (Status: $http_code)."
+            exit 1
+          fi
