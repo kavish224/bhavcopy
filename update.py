@@ -5,8 +5,8 @@ import subprocess
 
 def download_and_commit():
     today = date.today()
-    # yyyymmdd = today.strftime('%Y%m%d')
-    yyyymmdd = '20250701'
+    yyyymmdd = today.strftime('%Y%m%d')
+    # yyyymmdd = '20250702'
     url = f"https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_{yyyymmdd}_F_0000.csv.zip"
 
     headers = {
